@@ -1,7 +1,7 @@
 // the deck contains the 52 cards of the game
-// we suffle up the deck when instanciate
+// we shuffle up the deck when instanciate
 
-//var shuffle = require('utils/Suffle');
+var Shuffle = require('./Shuffle.js');
 var Card = require('./Card.js');
 
 function Deck() {
@@ -12,6 +12,11 @@ function Deck() {
 			this.cards.push(card);
 		}
 	}
+
+	var shuf = new Shuffle();
+	shuf.shuffleUp(this.cards);
+
+	// we need to shuffle up the deck for drawing card ramdomly
 }
 
 Deck.prototype.displayDeck = function() {
@@ -22,7 +27,7 @@ Deck.prototype.displayDeck = function() {
 
 Deck.prototype.drawCard = function() {
 	var card = this.cards[0];
-	this.cards.slice(0,1);
+	this.cards.splice(0,1);
 	return card;
 }
 
