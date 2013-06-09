@@ -6,7 +6,6 @@ var hand = require('./Card');
 
 
 function Hand() {
-
 	this.cards = [];
 	this.ranks = [];
 	this.value = [];
@@ -64,6 +63,12 @@ Hand.prototype.addCard = function(Card) {
 
 	this.ranks[Card.getRank()]++;
 
+}
+
+Hand.prototype.displayHand = function() {
+	for(var i = 0; i < this.cards.length; i++) {
+		this.cards[i].displayCard();
+	}
 }
 
 Hand.prototype.compare = function(otherHand) {

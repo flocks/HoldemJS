@@ -11,8 +11,21 @@ var deck = new Deck();
 var card1 = deck.drawCard();
 var card2 = deck.drawCard();
 var card3 = deck.drawCard();
+var card4 = deck.drawCard();
+var card5 = deck.drawCard();
 
-card1.displayCard();
-card2.displayCard();
-card3.displayCard();
+
+var hand = new Hand();
+
+hand.addCard(card1);
+hand.addCard(card2);
+hand.addCard(card3);
+hand.addCard(card4);
+hand.addCard(card5);
+
+
+console.log(hand.ranks);
+
+hand.displayHand();
+
 

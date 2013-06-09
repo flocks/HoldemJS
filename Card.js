@@ -8,8 +8,15 @@ function Card(rank, suit) {
 	this.suit = suit;
 }
 
+Card.prototype.getRank = function() {
+	return this.rank;
+}
+Card.prototype.getSuit = function() {
+	return this.suit;
+}
+
 Card.prototype.displayCard = function() {
-	console.log(ranks[this.rank], ' of ', suits[this.suit]);
+	console.log(ranks[this.rank]+suits[this.suit].slice(0,1));
 }
 
 
