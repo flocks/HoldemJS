@@ -27,7 +27,7 @@ Hand.prototype.computeValue = function() {
 	// fill the value array of the hand
 
 
-	for (int x=13; x>=1; x--) {
+	for (var x=13; x>=1; x--) {
      if (this.ranks[x] > this.sameCards) {
          if (this.sameCards != 1)
          //if sameCards was not the default value
@@ -45,7 +45,7 @@ Hand.prototype.computeValue = function() {
      	}
 	}
 
-	for (int x=0; x<4; x++)  {
+	for (var x=0; x<4; x++)  {
    	 	if ( this.cards[x].getSuit() != this.cards[x+1].getSuit() ) {
    	 		this.isFlush=false;
    	 	}
@@ -81,4 +81,4 @@ Hand.prototype.compare = function(otherHand) {
 }
 
 
-module.exports = Hands;	
+module.exports = Hand;	
