@@ -1,4 +1,4 @@
-
+// need to be improved, with 2 decks
 function Shuffle() {
 
 }
