@@ -14,6 +14,12 @@ function Deck() {
 	}
 }
 
+Deck.prototype.displayDeck = function() {
+	for(var i = 0; i < this.cards.length; i++) {
+		this.cards[i].displayCard();
+	}
+}
+
 Deck.prototype.drawCard = function() {
 	var card = this.cards[0];
 	this.cards.slice(0,1);
