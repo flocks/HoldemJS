@@ -63,6 +63,7 @@ Hand.prototype.computeValue = function() {
     	straightHighness=14; //higher than king
 	}
 
+	// 
 	for(var x = 0; x < 9; x++) {
 		if (this.ranks[x] == 1 && this.ranks[x+1] == 1 && this.ranks[x+2] == 1 && this.ranks[x+3] == 1) {
 			isStraight = true;
@@ -72,6 +73,13 @@ Hand.prototype.computeValue = function() {
 	}
 
 	var sortedRanks = [];
+	// first we fill the array to 0, to avoid "undefined" value
+
+	for(var x = 0; x < 6; x++) {
+		sortedRanks[x] = 0;
+	}
+
+
 	var i = 0;
 
 	if (this.ranks[1] == 1) {
@@ -118,11 +126,15 @@ Hand.prototype.computeValue = function() {
 	}
 	if (sameCards==2 && sameCards2==2) {
     	this.value[0]=3;
-    //rank of greater pair
     	this.value[1]= largeGroupRank>smallGroupRank ? largeGroupRank : smallGroupRank;
-    //rank of smaller pair
     	this.value[2]= largeGroupRank<smallGroupRank ? largeGroupRank : smallGroupRank;
-   	 	this.value[3]=sortedRanks[0];  //extra card
+   	 	this.value[3]=sortedRanks[0];  
+	}
+	if (sameCards==3 && sameCards2!=2) {
+    	this.value[0]=4;
+    	this.value[1]= largeGroupRank;
+    	this.value[2]=sortedRanks[0];
+    	this.value[3]=sortedRanks[1];
 	}
 	if (isStraight) {
     	this.value[0]=5;
