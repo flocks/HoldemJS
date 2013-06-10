@@ -27,8 +27,8 @@ Hand.prototype.computeValue = function() {
 	// we assume it's true
 
 	var isFlush = true; 
-	var isStraight = true;
-
+	var isStraight = false;
+	var straightHighness = 0;
 
 	for (var x=13; x>=1; x--) {
      if (this.ranks[x] > sameCards) {
@@ -57,7 +57,19 @@ Hand.prototype.computeValue = function() {
 	}
 
 	// check if hands is a straight
-	
+
+	if (this.ranks[10]==1 && this.ranks[11]==1 && this.ranks[12]==1 && this.ranks[13]==1 && this.ranks[1]==1) {
+    	isStraight=true;
+    	straightHighness=14; //higher than king
+	}
+
+	for(var x = 0; x < 9; x++) {
+		if (this.ranks[x] == 1 && this.ranks[x+1] == 1 && this.ranks[x+2] == 1 && this.ranks[x+3] == 1) {
+			isStraight = true;
+			straightHighness = x+4;
+			break; 
+		}
+	}
 
 	var sortedRanks = [];
 	var i = 0;
@@ -114,7 +126,7 @@ Hand.prototype.computeValue = function() {
 	}
 	if (isStraight) {
     	this.value[0]=5;
-    	this.value[1]=;
+    	this.value[1]= straightHighness;
 	}
 	if (isFlush)   {
     	this.value[0]=6;
@@ -138,7 +150,7 @@ Hand.prototype.computeValue = function() {
 
 	if (isStraight && isFlush)  {
     	this.value[0]=9;
-    	this.value[1]=;
+    	this.value[1]= straightHighness;
 	}
 
 
@@ -155,6 +167,10 @@ Hand.prototype.addCard = function(Card) {
 
 	this.ranks[Card.getRank()]++;
 
+	if (this.cards.length == 5) {
+		this.computeValue();
+	}
+
 }
 
 Hand.prototype.displayHand = function() {
@@ -164,6 +180,8 @@ Hand.prototype.displayHand = function() {
 }
 
 Hand.prototype.compare = function(otherHand) {
+	console.log(this.value);
+	console.log(otherHand.value);
 	for (var i = 0; i < 6; i++) {
 		if (this.value[i] > otherHand.value[i]) {
 			return 1;
@@ -171,10 +189,9 @@ Hand.prototype.compare = function(otherHand) {
 		else if(this.value[i] < otherHand.value[i]) {
 			return -1;
 		}
-		else {
-			return 0;
-		}
 	}
+
+	return 0;
 }
 
 

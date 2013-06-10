@@ -14,6 +14,13 @@ var card3 = deck.drawCard();
 var card4 = deck.drawCard();
 var card5 = deck.drawCard();
 
+var card6 = deck.drawCard();
+var card7 = deck.drawCard();
+var card8 = deck.drawCard();
+var card9 = deck.drawCard();
+var card10 = deck.drawCard();
+
+
 
 var hand = new Hand();
 
@@ -23,9 +30,21 @@ hand.addCard(card3);
 hand.addCard(card4);
 hand.addCard(card5);
 
+var hand2 = new Hand();
+hand2.addCard(card6);
+hand2.addCard(card7);
+hand2.addCard(card8);
+hand2.addCard(card9);
+hand2.addCard(card10);
 
-console.log(hand.ranks);
+
+
 
 hand.displayHand();
+console.log("---------");
+hand2.displayHand();
+console.log("---------");
 
+
+console.log(hand.compare(hand2));
 
