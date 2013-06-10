@@ -192,8 +192,6 @@ Hand.prototype.displayHand = function() {
 }
 
 Hand.prototype.compare = function(otherHand) {
-	console.log(this.value);
-	console.log(otherHand.value);
 	for (var i = 0; i < 6; i++) {
 		if (this.value[i] > otherHand.value[i]) {
 			return 1;
@@ -204,6 +202,10 @@ Hand.prototype.compare = function(otherHand) {
 	}
 
 	return 0;
+}
+
+Hand.prototype.compareMultiple = function() {
+	
 }
 
 
