@@ -9,11 +9,7 @@ function Hand() {
 	this.cards = [];
 	this.ranks = [];
 	this.value = [];
-	this.sameCard = 1;
-	this.sameCards2 = 1;
-	this.smallGroupRank = 0;
-	this.largeGroupRank = 0;
-	this.isFlush = true;
+
 
 	// we set the ranks to 0
 	for(var i = 0; i < 13; i++) {
@@ -24,32 +20,128 @@ function Hand() {
 
 Hand.prototype.computeValue = function() {
 	// fill the value array of the hand
+	var sameCards = 1;
+	var sameCards2 = 1;
+	var smallGroupRank = 0;
+	var largeGroupRank = 0;
+	// we assume it's true
+
+	var isFlush = true; 
+	var isStraight = true;
 
 
 	for (var x=13; x>=1; x--) {
-     if (this.ranks[x] > this.sameCards) {
-         if (this.sameCards != 1)
-         //if sameCards was not the default value
-         {
-             this.sameCards2 = this.sameCards;
-             this.smallGroupRank = this.largeGroupRank;
+     if (this.ranks[x] > sameCards) {
+
+         if (sameCards != 1) {
+ 	        sameCards2 = sameCards;
+            smallGroupRank = largeGroupRank;
          }
          
-        this.sameCards = this.ranks[x];
-        this.largeGroupRank = x;
+        sameCards = this.ranks[x];
+        largeGroupRank = x;
          
-     } else if (this.ranks[x] > this.sameCards2) {
-         this.sameCards2 = this.ranks[x];
-         this.smallGroupRank = x;
+     } 
+     else if (this.ranks[x] > sameCards2) {
+         sameCards2 = this.ranks[x];
+         smallGroupRank = x;
      	}
 	}
 
+	// check if hands is flushed
 	for (var x=0; x<4; x++)  {
    	 	if ( this.cards[x].getSuit() != this.cards[x+1].getSuit() ) {
-   	 		this.isFlush=false;
+   	 		isFlush=false;
    	 	}
         
 	}
+
+	// check if hands is a straight
+	
+
+	var sortedRanks = [];
+	var i = 0;
+
+	if (this.ranks[1] == 1) {
+		sortedRanks[i] = 14;
+		i++;
+	}
+
+	for(var k = 13; k >= 2; k--) {
+		if (this.ranks[k] == 1) { 
+			sortedRanks[i] = k;
+		}
+	}
+
+	// now we have all the informations for filling the value array
+
+	//The first cell of the array is the type of the hand :
+	// 1 for no pair ( so a hand "HIGH")
+	// 2 for a pair
+	// 3 for two pairs
+	// 4 for a set
+	// 5 for a straight
+	// 6 for a flush
+	// 7 for a full house
+	// 8 for a four of a kind
+	// 9 for straigth flush
+	// we will use the next cells of the value array to store the others cards of the hand, ordered by hand
+
+
+
+	if ( sameCards==1 ) {    
+  	  	this.value[0]=1;          
+   		this.value[1]=sortedRanks[0];  
+    	this.value[2]=sortedRanks[1]; 
+    	this.value[3]=sortedRanks[2];  
+    	this.value[4]=sortedRanks[3];
+    	this.value[5]=sortedRanks[4];
+	}
+	if (sameCards==2 && sameCards2==1) {
+    	this.value[0]=2;                
+    	this.value[1]=largeGroupRank;   
+    	this.value[2]=sortedRanks[0];  
+    	this.value[3]=sortedRanks[1];
+    	this.value[4]=sortedRanks[2];
+	}
+	if (sameCards==2 && sameCards2==2) {
+    	this.value[0]=3;
+    //rank of greater pair
+    	this.value[1]= largeGroupRank>smallGroupRank ? largeGroupRank : smallGroupRank;
+    //rank of smaller pair
+    	this.value[2]= largeGroupRank<smallGroupRank ? largeGroupRank : smallGroupRank;
+   	 	this.value[3]=sortedRanks[0];  //extra card
+	}
+	if (isStraight) {
+    	this.value[0]=5;
+    	this.value[1]=;
+	}
+	if (isFlush)   {
+    	this.value[0]=6;
+    	this.value[1]=sortedRanks[0]; //tie determined by ranks of cards
+    	this.value[2]=sortedRanks[1];
+    	this.value[3]=sortedRanks[2];
+    	this.value[4]=sortedRanks[3];
+    	this.value[5]=sortedRanks[4];
+	}
+	if (sameCards==3 && sameCards2==2)  {
+   		this.value[0]=7;
+    	this.value[1]=largeGroupRank;
+    	this.value[2]=smallGroupRank;
+	}
+
+	if (sameCards==4)  {
+   	 this.value[0]=8;
+    	this.value[1]=largeGroupRank;
+    	this.value[2]=sortedRanks[0];
+	}
+
+	if (isStraight && isFlush)  {
+    	this.value[0]=9;
+    	this.value[1]=;
+	}
+
+
 }
 
 
