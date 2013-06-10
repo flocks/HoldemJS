@@ -35,4 +35,8 @@ Deck.prototype.getSizeDeck = function() {
 	return this.cards.length;
 }
 
+Deck.prototype.removeSpecificCard = function(Card) {
+	
+}
+
 module.exports = Deck;
