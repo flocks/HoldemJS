@@ -1,7 +1,7 @@
 var Card = require('./Card');
 var Deck = require('./Deck');
 var Hand = require('./Hand');
-
+var Dealer = require('./Dealer');
 
 var hand = new Hand();
 var deck = new Deck();
@@ -48,3 +48,6 @@ console.log("---------");
 
 console.log(hand.compare(hand2));
 
+
+d = new Dealer();
+d.drawBoard();
