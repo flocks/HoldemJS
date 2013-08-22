@@ -17,8 +17,35 @@ Dealer.prototype.drawCard = function(card) {
 	this.startingHands[card.getRank()][card.getSuit()] = true;
 }
 
-Dealer.prototype.drawBoard = function(cards) {
-//	deck.removeSpecificCard();
-} 
 
+Dealer.prototype.compareHands = function(twoCards1, twoCards2) {
+
+	
+}
+
+
+//among the 21 combi, return the best hand
+Dealer.prototype.computeBestHands = function(array) {
+
+}
+
+Dealer.prototype.permuteHands = function(startingCards, board) {
+	// ex : startingCard : AK, board = AT2QT
+	// there is 21 final hands possible : 5 cards among 7 cards ( 7! / 5! * (7-5)!) 
+	// TODO : complete this shit, there is only 11 combi generated
+
+	var arr = [];
+
+	for(var i = 0; i < 2; i++) {
+		for(var j = 0; j < 5; j++) {
+			var hand =  board;
+			hand[j] = startingCards[i];
+			arr.push(hand);
+		}
+	}
+
+	arr.push(board); // last permutation
+
+	return arr;
+}
 module.exports = Dealer;

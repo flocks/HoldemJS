@@ -20,6 +20,15 @@ Deck.prototype.displayDeck = function() {
 	}
 }
 
+Deck.prototype.buildBoard = function() {
+	var arr = [];
+
+	for(var i =0; i < 5; i ++) {
+		arr.push(this.drawCard());
+	}
+
+	return arr;
+}
 Deck.prototype.drawCard = function() {
 	var card = this.cards[0];
 	this.cards.splice(0,1);
@@ -50,22 +59,6 @@ Deck.prototype.buildDeck = function() {
 
 }
 
-Deck.prototype.permuteHands = function(startingCards, board) {
-	// ex : startingCard : AK, board = AT2QT
-	// there is 21 final hands possible : 5 cards among 7 cards ( 7! / 5! * (7-5)!) 
-	
-	var arr = [];
-
-	for(var i = 0; i < 2; i++) {
-		for(var j = 0; j < 5: j++) {
-			var hand = board[j] = startingCards[i];
-			arr.push(hand);
-		}
-	}
-
-	arr.push(board); // last permutation
-
-}
 
 Deck.prototype.buildDeckWithoutStartingCards = function(startingCards) {
 	// we build the deck without the players's starting hands

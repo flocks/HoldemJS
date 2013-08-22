@@ -21,7 +21,6 @@ var card9 = deck.drawCard();
 var card10 = deck.drawCard();
 
 
-
 var hand = new Hand();
 
 hand.addCard(card1);
@@ -38,6 +37,9 @@ hand2.addCard(card9);
 hand2.addCard(card10);
 
 
+var startingHands = [card1, card2];
+var board = hand;
+
 
 
 hand.displayHand();
@@ -51,3 +53,5 @@ console.log(hand.compare(hand2));
 
 d = new Dealer();
 d.drawBoard();
+d.permuteHands(startingHands,board);
+
