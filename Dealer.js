@@ -1,6 +1,7 @@
 // Dealer is in charge of distributing card to players, and drawing the board
 // it's a kind of mediator you have to pass through 
 
+var Card = require('./Card.js');
 var Deck = require('./Deck.js');
 
 var deck = new Deck();
@@ -29,28 +30,59 @@ var parseHH = function(hh) {
 	return arr;
 }
 
-var ranksMatching= { "A" : 0, "2" : 1, "3" : 2, "4" : 3 , '5': 4, '6' : 5, '7' : 6,'8' : 7, '9' : 8, 'T' : 9, 'J' : 10; 'Q' : 11, 'K' : 12}
-var suitMatching = {"h": 0, "d" : 1, "s" : 2, "c" : 3};
+var ranksMatching= { "A" : 0, "2" : 1, "3" : 2, "4" : 3 , '5': 4, '6' : 5, '7' : 6,'8' : 7, '9' : 8, 'T' : 9, 'J' : 10, 'Q' : 11, 'K' : 12}
 
 // convert a string like Ac into an object Card
 var convertHands = function(str) {
-	var rank = str.splice(0,1);
-	var suit = str.splice(1,1);
 
-	var card = new Card(ranksMatching[rank], suitMatching[suit]);
+	var rank1 = str.slice(0,1);
+	var rank2 = str.slice(1,2);
 
-	return card;
+	console.log(rank2);
+	
+	suit1  = Math.floor(Math.random() * 3) + 1;
+
+
+	var card1 = new Card(ranksMatching[rank1], suit1);
+
+	suit2  = Math.floor(Math.random() * 3) + 1;
+
+	// if it's a pair, can't be suitted
+	if (ranksMatching[rank1] == ranksMatching[rank2]) {
+		while ( suit1== suit2) {
+			suit2  = Math.floor(Math.random() * 3) + 1;
+		}
+	}
+	
+
+
+	var card2 = new Card(ranksMatching[rank2], suit2);
+
+	var arr = [];
+	arr.push(card1);
+	arr.push(card2);
+
+	return arr;
 
 }
 
-// draw 5 card from deck
-//cards argument is the array of cards which have already been dealt
 
-Dealer.prototype.drawCard = function(card) {
-	this.startingHands[card.getRank()] = [];
-	this.startingHands[card.getRank()][card.getSuit()] = true;
+
+// find among the board ( 5 cards ) the best combi of 5 cards
+
+var findBestHand = function(twoCards, board) {
+	// ex : startingCard : AK, board = AT2QT
+	// there is 21 final hands possible : 5 cards among 7 cards ( 7! / 5! * (7-5)!) 
+	
+
+	var hand = new Hand();
+
+	for(var i = 0; i < board.length; i++) {
+		hand.addCard(board[i]);
+
+	}
+	return hand; // return board for testing
 }
-
 
 Dealer.prototype.compareHands = function(twoCards1, twoCards2) {
 
@@ -62,11 +94,21 @@ Dealer.prototype.compareHands = function(twoCards1, twoCards2) {
 
 	var h1  = convertHands(twoCards1);
 	var h2  = convertHands(twoCards2);
-
+	console.log(h1);
+	console.log(h2);
 	var deck = new Deck();
 
+
+	
 	deck.buildDeckWithoutStartingCards([h1, h2]);
 	
+	var board = deck.buildBoard();
+
+	var bestHand1 = findBestHand(h1, board);
+	var bestHand2 = findBestHand2(h2, board);
+
+
+
 	
 }
 

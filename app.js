@@ -3,6 +3,11 @@ var Deck = require('./Deck');
 var Hand = require('./Hand');
 var Dealer = require('./Dealer');
 
+var dealeur = new Dealer();
+
+dealeur.compareHands('AA', 'KK');
+
+/*
 var hand = new Hand();
 var deck = new Deck();
 
@@ -46,6 +51,6 @@ hand.displayHand();
 console.log("---------");
 hand2.displayHand();
 console.log("---------");
-
+*/
 
 
