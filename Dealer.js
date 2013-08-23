@@ -74,9 +74,14 @@ var findBestHand = function(twoCards, board) {
 	// ex : startingCard : AK, board = AT2QT
 	// there is 21 final hands possible : 5 cards among 7 cards ( 7! / 5! * (7-5)!) 
 	
+
 	var hand = new Hand();
 
-	for(var i = 0; i < board.length; i++) {
+	hand.addCard(twoCards[0]);
+	hand.addCard(twoCards[1]);
+
+
+	for(var i = 2; i < board.length; i++) {
 		hand.addCard(board[i]);
 
 	}
@@ -123,7 +128,7 @@ Dealer.prototype.compareHands = function(twoCards1, twoCards2) {
 		c += bestHand1.compare(bestHand2);
 	}
 
-	console.log((c/repeat) * 100);
+	console.log((c * 100 /repeat) + '%');
 
 	
 

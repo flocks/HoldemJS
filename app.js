@@ -5,7 +5,7 @@ var Dealer = require('./Dealer');
 
 var dealeur = new Dealer();
 
-dealeur.compareHands('AA', 'KK');
+dealeur.compareHands('AK', 'KT');
 
 /*
 var hand = new Hand();
