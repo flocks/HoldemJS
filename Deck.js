@@ -69,7 +69,7 @@ Deck.prototype.buildDeckWithoutStartingCards = function(startingCards) {
 	for(var c=0; c < 4; c++) {
 		for(var r=0; r < 13; r++) {
 			var card = new Card(r,c);
-			if (typeof startingCards[r][c] == "undefined") {
+			if (typeof startingCards[r] == "undefined" || typeof startingCards[r][c] == "undefined") {
 				this.cards.push(card);
 			}
 		}
