@@ -7,11 +7,12 @@ var Card = require('./Card.js');
 function Deck() {
 	this.cards = [];
 	
-
+/*
 
 	this.buildDeck();
 	// we need to shuffle up the deck for drawing card ramdomly
 	this.shuffleUp();
+	*/
 }
 
 Deck.prototype.displayDeck = function() {
@@ -76,6 +77,8 @@ Deck.prototype.buildDeckWithoutStartingCards = function(startingCards) {
 
 
 	// we shuffle up
+
+	this.shuffleUp();
 }
 
 module.exports = Deck;

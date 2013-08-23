@@ -19,5 +19,9 @@ Card.prototype.displayCard = function() {
 	console.log(ranks[this.rank]+suits[this.suit].slice(0,1));
 }
 
+Card.prototype.isEqual = function(card) {
+	return (card.getRank() == this.getRank() && card.getSuit() == this.getSuit());
+}
+
 
 module.exports = Card;

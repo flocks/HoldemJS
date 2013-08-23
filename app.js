@@ -48,10 +48,4 @@ hand2.displayHand();
 console.log("---------");
 
 
-console.log(hand.compare(hand2));
-
-
-d = new Dealer();
-d.drawBoard();
-d.permuteHands(startingHands,board);
 
